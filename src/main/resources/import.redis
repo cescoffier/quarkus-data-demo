@@ -1,0 +1,5 @@
+FT.CREATE drinks-index ON JSON SCHEMA $.name AS name TEXT $.description AS description TEXT $.price AS price NUMERIC
+JSON.SET drink-1 $ '{"name": "Cappuccino", "description": "Dark, rich espresso lies in wait under a smoothed and stretched layer of thick milk foam. An alchemy of barista artistry and craft.", "price":5.5, "picture":"images/cappuccino.jpg"}'
+JSON.SET drink-2 $ '{"name": "Caffè Americano", "description": "Espresso shots topped with hot water create a light layer of crema culminating in this wonderfully rich cup with depth and nuance.", "price":3.5, "picture":"images/americano.jpg"}'
+JSON.SET drink-3 $ '{"name": "Espresso", "description": "Our smooth signature Espresso Roast with rich flavor and caramelly sweetness is at the very heart of everything we do.", "price":2.0, "picture":"images/expresso.jpg"}'
+JSON.SET drink-4 $ '{"name": "Hot Chocolate", "description": "Steamed milk with vanilla- and chocolate-flavored syrups. Topped with sweetened whipped cream and chocolate-flavored drizzle. A timeless classic made to sweeten your spirits.", "price":4.0, "picture":"images/chocolate.jpg"}'
