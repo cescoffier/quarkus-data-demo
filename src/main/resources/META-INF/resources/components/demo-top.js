@@ -15,10 +15,10 @@ import './qui-alert.js';
 export class DemoTop extends LitElement {
     static styles = css`
       .grid {
-        margin-top: 10px;
         padding: 10px;
-        background: #EFE3CF81;
-        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
       h2 {
@@ -66,8 +66,10 @@ export class DemoTop extends LitElement {
         console.log("top is", this._top);
         return html`
             <div class="grid">
-                <h2>Top Products</h2>
-                ${this._top.map(product => this._renderProduct(product))}
+                <div>
+                    <h2>Top Products</h2>
+                    ${this._top.map(product => this._renderProduct(product))}
+                </div>
             </div>`;
     }
 

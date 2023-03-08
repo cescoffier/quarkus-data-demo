@@ -15,16 +15,12 @@ import './qui-alert.js';
 export class DemoSearch extends LitElement {
     static styles = css`
       .grid {
-        margin-top: 10px;
         padding: 10px;
-        background: #EFE3CF81;
-        border-radius: 5px;
+        display: flex;
+        justify-content: center;
       }
-
-      h2 {
-        font-family: Pacifico, fantasy;
-        text-align: left;
-        color: var(--main-highlight-text-color);
+      vaadin-text-field {
+        width: 50%;
       }
     `;
 
@@ -51,7 +47,6 @@ export class DemoSearch extends LitElement {
     render() {
         return html`
             <div class="grid">
-                <h2>Search</h2>
                 <vaadin-text-field placeholder="Search"
                                    @value-changed="${e => {
                                        const searchTerm = (e.detail.value || '').trim();

@@ -26,7 +26,11 @@ export class DemoTitle extends LitElement {
 
       .title {
         text-align: center;
-        margin: 5em auto;
+        padding: 1em;
+        background: #C3B9A9;
+        background: -moz-linear-gradient(top, #C3B9A9 0%, #CCC2B1 13%, #F3EADB 100%);
+        background: -webkit-linear-gradient(top, #C3B9A9 0%, #CCC2B1 13%, #F3EADB 100%);
+        background: linear-gradient(to bottom, #C3B9A9 0%, #CCC2B1 13%, #F3EADB 100%);
       }
     `
 

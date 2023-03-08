@@ -18,10 +18,10 @@ export class DemoDrink extends LitElement {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        border: 2px solid var(--main-highlight-text-color);
+        border: 1px solid #c3b9a9;
         border-radius: 4px;
         width: 290px;
-        filter: brightness(90%);
+        background: #ede1cd;
       }
 
       .card-header {
@@ -67,6 +67,8 @@ export class DemoDrink extends LitElement {
         float: right;
         margin-right: 5px;
         margin-bottom: 5px;
+        color: var(--main-highlight-text-color);
+        cursor: pointer;
       }
       
       .active:hover {
