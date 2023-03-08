@@ -1,249 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" type="image/png" href="favicon.ico">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="shortcut icon" type="image/png" href="favicon.ico">
 
-    <link rel="stylesheet" href="fonts/red-hat-font.min.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Pacifico" />
+        <script async src="/_static/es-module-shims/dist/es-module-shims.js"></script>
+        <script src="/_importmap/dynamic-importmap.js"></script>
 
-    <!--  <script type="module" src="qwc/qwc-menu.js"></script>-->
-    <!--  <script type="module" src="qwc/qwc-footer.js"></script>-->
+        <script type="module">
+            import 'icons/font-awesome.js';
+            import 'components/qui-alert.js';
+            import 'components/demo-component.js';
+            import 'components/demo-drinks.js';
+            import 'components/demo-orders.js';
+            import 'components/demo-title.js';
+            import 'components/demo-top.js';
+            import 'components/demo-search.js';
+        </script>
+        
+        <link rel="stylesheet" href="fonts/red-hat-font.min.css">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Pacifico" />
 
-    <title>Coffeeshop</title>
+        <title>Coffeeshop</title>
 
-    <script type="importmap">
-            {
-  "imports" : {
-    "@vaadin/form-layout/" : "/_static/form-layout/",
-    "@vaadin/list-box" : "/_static/list-box/vaadin-list-box.js",
-    "devui-data" : "/q/dev-ui/devui-data.js",
-    "@vaadin/context-menu/" : "/_static/context-menu/",
-    "@vaadin/overlay" : "/_static/overlay/vaadin-overlay.js",
-    "@vaadin/upload" : "/_static/upload/vaadin-upload.js",
-    "connection-state" : "/q/dev-ui/state/connection-state.js",
-    "@types/trusted-types/" : "/_static/trusted-types/",
-    "router-controller" : "/q/dev-ui/controller/router-controller.js",
-    "@webcomponents/shadycss/" : "/_static/shadycss/",
-    "theme-state" : "/q/dev-ui/state/theme-state.js",
-    "@vaadin/select" : "/_static/select/vaadin-select.js",
-    "font/" : "/q/dev-ui/font/",
-    "@vaadin/virtual-list/" : "/_static/virtual-list/",
-    "@vaadin/details/" : "/_static/details/",
-    "@vaadin/field-base" : "/_static/field-base/index.js",
-    "@vaadin/vaadin-development-mode-detector" : "/_static/vaadin-development-mode-detector/vaadin-development-mode-detector.js",
-    "@vaadin/tabsheet" : "/_static/vaadin-tabsheet/vaadin-tabsheet.js",
-    "@vaadin/text-area" : "/_static/text-area/vaadin-text-area.js",
-    "jsonrpc" : "/q/dev-ui/controller/jsonrpc.js",
-    "@vanillawc/wc-codemirror" : "/_static/wc-codemirror/index.js",
-    "icon/" : "/q/dev-ui/icon/",
-    "@vaadin/tooltip/" : "/_static/tooltip/",
-    "@vaadin/tabsheet/" : "/_static/vaadin-tabsheet/",
-    "@vaadin/date-time-picker" : "/_static/date-time-picker/vaadin-date-time-picker.js",
-    "@types/trusted-types" : "/_static/trusted-types/index.js",
-    "@vaadin/time-picker" : "/_static/time-picker/vaadin-time-picker.js",
-    "lit-html" : "/_static/lit-html/lit-html.js",
-    "@vaadin/number-field" : "/_static/number-field/vaadin-number-field.js",
-    "@vaadin/vertical-layout" : "/_static/vertical-layout/vaadin-vertical-layout.js",
-    "@vaadin/dialog/" : "/_static/dialog/",
-    "@vaadin/details" : "/_static/details/vaadin-details.js",
-    "arc-data" : "/q/dev-ui/arc-data.js",
-    "@vaadin/item/" : "/_static/item/",
-    "@vaadin/notification/" : "/_static/notification/",
-    "@vaadin/combo-box/" : "/_static/combo-box/",
-    "@vaadin/avatar" : "/_static/avatar/vaadin-avatar.js",
-    "@vaadin/router/" : "/_static/router/",
-    "qui/" : "/q/dev-ui/qui/",
-    "@vaadin/radio-group" : "/_static/radio-group/vaadin-radio-group.js",
-    "@vaadin/horizontal-layout" : "/_static/horizontal-layout/vaadin-horizontal-layout.js",
-    "@open-wc/dedupe-mixin" : "/_static/dedupe-mixin/index.js",
-    "@polymer/iron-meta" : "/_static/iron-meta/iron-meta.js",
-    "@vaadin/multi-select-combo-box/" : "/_static/multi-select-combo-box/",
-    "lit/" : "/_static/lit/",
-    "@polymer/iron-meta/" : "/_static/iron-meta/",
-    "@vaadin/custom-field" : "/_static/custom-field/vaadin-custom-field.js",
-    "@vaadin/vaadin-usage-statistics/" : "/_static/vaadin-usage-statistics/",
-    "@vaadin/lit-renderer" : "/_static/lit-renderer/src/lit-renderer.js",
-    "@vaadin/message-list/" : "/_static/message-list/",
-    "@vaadin/vaadin-list-mixin" : "/_static/vaadin-list-mixin/vaadin-list-mixin.js",
-    "@vaadin/vaadin-usage-statistics" : "/_static/vaadin-usage-statistics/vaadin-usage-statistics.js",
-    "@vaadin/split-layout/" : "/_static/split-layout/",
-    "@vaadin/time-picker/" : "/_static/time-picker/",
-    "@vaadin/overlay/" : "/_static/overlay/",
-    "@vaadin/field-base/" : "/_static/field-base/",
-    "@vaadin/tabs" : "/_static/vaadin-tabs/vaadin-tabs.js",
-    "@vaadin/text-area/" : "/_static/text-area/",
-    "@vanillawc/wc-codemirror/" : "/_static/wc-codemirror/",
-    "@vaadin/icon" : "/_static/icon/vaadin-icon.js",
-    "@lit/reactive-element" : "/_static/reactive-element/reactive-element.js",
-    "@vaadin/vertical-layout/" : "/_static/vertical-layout/",
-    "@vaadin/text-field" : "/_static/text-field/vaadin-text-field.js",
-    "lit-html/" : "/_static/lit-html/",
-    "@vaadin/checkbox" : "/_static/checkbox/vaadin-checkbox.js",
-    "lit-element-state/" : "/_static/lit-element-state/",
-    "@vaadin/component-base" : "/_static/component-base/index.js",
-    "qui-badge" : "/q/dev-ui/qui/qui-badge.js",
-    "state/" : "/q/dev-ui/state/",
-    "@vaadin/input-container" : "/_static/input-container/vaadin-input-container.js",
-    "@vaadin/input-container/" : "/_static/input-container/",
-    "@vaadin/scroller" : "/_static/scroller/vaadin-scroller.js",
-    "@vaadin/vaadin-lumo-styles" : "/_static/vaadin-lumo-styles/all-imports.js",
-    "@vaadin/button/" : "/_static/button/",
-    "@polymer/iron-icon/" : "/_static/iron-icon/",
-    "@vaadin/form-layout" : "/_static/form-layout/vaadin-form-layout.js",
-    "@vaadin/checkbox-group" : "/_static/checkbox-group/vaadin-checkbox-group.js",
-    "@vaadin/scroller/" : "/_static/scroller/",
-    "devui/" : "/q/dev-ui//",
-    "@polymer/polymer/" : "/_static/polymer/",
-    "@vaadin/upload/" : "/_static/upload/",
-    "path-to-regexp" : "/_static/path-to-regexp/index.js",
-    "@vaadin/confirm-dialog" : "/_static/confirm-dialog/vaadin-confirm-dialog.js",
-    "path-to-regexp/" : "/_static/path-to-regexp/",
-    "lit" : "/_static/lit/index.js",
-    "@vaadin/grid" : "/_static/grid/vaadin-grid.js",
-    "@vaadin/router" : "/_static/router/dist/vaadin-router.js",
-    "@vaadin/list-box/" : "/_static/list-box/",
-    "@polymer/polymer" : "/_static/polymer/polymer-element.js",
-    "@vaadin/context-menu" : "/_static/context-menu/vaadin-context-menu.js",
-    "@polymer/iron-iconset-svg/" : "/_static/iron-iconset-svg/",
-    "@vaadin/password-field" : "/_static/password-field/vaadin-password-field.js",
-    "@polymer/iron-iconset-svg" : "/_static/iron-iconset-svg/iron-iconset-svg.js",
-    "@vaadin/progress-bar/" : "/_static/progress-bar/",
-    "@vaadin/date-time-picker/" : "/_static/date-time-picker/",
-    "@vaadin/progress-bar" : "/_static/progress-bar/vaadin-progress-bar.js",
-    "@vaadin/vaadin-themable-mixin/" : "/_static/vaadin-themable-mixin/",
-    "@vaadin/multi-select-combo-box" : "/_static/multi-select-combo-box/vaadin-multi-select-combo-box.js",
-    "lit-element/" : "/_static/lit-element/",
-    "devui-state" : "/q/dev-ui/state/devui-state.js",
-    "@vaadin/email-field/" : "/_static/email-field/",
-    "@vaadin/tooltip" : "/_static/tooltip/vaadin-tooltip.js",
-    "@vaadin/select/" : "/_static/select/",
-    "@vaadin/tabs/" : "/_static/vaadin-tabs/",
-    "@vaadin/vaadin-material-styles/" : "/_static/vaadin-material-styles/",
-    "@vaadin/date-picker/" : "/_static/date-picker/",
-    "@vaadin/grid/" : "/_static/grid/",
-    "@vaadin/button" : "/_static/button/vaadin-button.js",
-    "lit-element-state" : "/_static/lit-element-state/lit-state.js",
-    "@vaadin/component-base/" : "/_static/component-base/",
-    "@vaadin/vaadin-themable-mixin" : "/_static/vaadin-themable-mixin/vaadin-themable-mixin.js",
-    "@vaadin/accordion" : "/_static/accordion/vaadin-accordion.js",
-    "@vaadin/text-field/" : "/_static/text-field/",
-    "@lit-labs/ssr-dom-shim" : "/_static/labs/ssr-dom-shim/index.js",
-    "@vaadin/avatar/" : "/_static/avatar/",
-    "@vaadin/vaadin-material-styles" : "/_static/vaadin-material-styles/all-imports.js",
-    "@polymer/iron-flex-layout/" : "/_static/iron-flex-layout/",
-    "@lit-labs/ssr-dom-shim/" : "/_static/labs/ssr-dom-shim/",
-    "@vaadin/checkbox/" : "/_static/checkbox/",
-    "@vaadin/number-field/" : "/_static/number-field/",
-    "@vaadin/virtual-list" : "/_static/virtual-list/vaadin-virtual-list.js",
-    "@vaadin/checkbox-group/" : "/_static/checkbox-group/",
-    "log-controller" : "/q/dev-ui/controller/log-controller.js",
-    "@vaadin/combo-box" : "/_static/combo-box/vaadin-combo-box.js",
-    "@vaadin/menu-bar" : "/_static/menu-bar/vaadin-menu-bar.js",
-    "@vaadin/message-list" : "/_static/message-list/vaadin-message-list.js",
-    "@vaadin/confirm-dialog/" : "/_static/confirm-dialog/",
-    "@vaadin/accordion/" : "/_static/accordion/",
-    "@vaadin/horizontal-layout/" : "/_static/horizontal-layout/",
-    "@vaadin/date-picker" : "/_static/date-picker/vaadin-date-picker.js",
-    "lit-element" : "/_static/lit-element/index.js",
-    "@vaadin/lit-renderer/" : "/_static/lit-renderer/",
-    "@vaadin/dialog" : "/_static/dialog/vaadin-dialog.js",
-    "notifier" : "/q/dev-ui/controller/notifier.js",
-    "@vaadin/vaadin-lumo-styles/" : "/_static/vaadin-lumo-styles/",
-    "@vaadin/item" : "/_static/item/vaadin-item.js",
-    "@lit/reactive-element/" : "/_static/reactive-element/",
-    "controller/" : "/q/dev-ui/controller/",
-    "@webcomponents/shadycss" : "/_static/shadycss/shadycss.min.js",
-    "@vaadin/split-layout" : "/_static/split-layout/vaadin-split-layout.js",
-    "qwc/" : "/q/dev-ui/qwc/",
-    "@open-wc/dedupe-mixin/" : "/_static/dedupe-mixin/",
-    "@vaadin/radio-group/" : "/_static/radio-group/",
-    "@vaadin/vaadin-list-mixin/" : "/_static/vaadin-list-mixin/",
-    "@vaadin/menu-bar/" : "/_static/menu-bar/",
-    "@vaadin/vaadin-development-mode-detector/" : "/_static/vaadin-development-mode-detector/",
-    "@polymer/iron-flex-layout" : "/_static/iron-flex-layout/index.js",
-    "@polymer/iron-icon" : "/_static/iron-icon/iron-icon.js",
-    "@vaadin/custom-field/" : "/_static/custom-field/",
-    "@vaadin/message-input/" : "/_static/message-input/",
-    "@vaadin/password-field/" : "/_static/password-field/",
-    "@vaadin/notification" : "/_static/notification/vaadin-notification.js",
-    "@vaadin/icon/" : "/_static/icon/",
-    "@vaadin/email-field" : "/_static/email-field/vaadin-email-field.js",
-    "@vaadin/message-input" : "/_static/message-input/vaadin-message-input.js"
-  }
-}
-    </script>
+        <style>
+            :root {
+                --main-bg-color: #F8F8F8;
+                --main-highlight-text-color: #35180A;
+            }
+            body {
+                margin: 0;
+                width: 100%;
+                height: 100vh;
+                font-family: 'Red Hat Text', sans-serif;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                color: var(--lumo-body-text-color);
+                background: var(--main-bg-color);
+            }
 
-    <script type="module" src="icons/font-awesome.js"></script>
+            /*Contains the menu and pages*/
+            .middle {
+                margin-left: auto;
+                margin-right: auto;
+                width: 1298px;
+                padding: 10px;
+                overflow: hidden;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                flex: 1;
+            }
+
+            #page {
+                overflow-y: auto;
+                overflow-x: hidden;
+                flex: 1;
+                padding-bottom: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <demo-title></demo-title>
+
+        <div class="middle">
+            <div id="page">
+                <demo-drinks></demo-drinks>
+
+                <demo-orders></demo-orders>
+
+                <demo-top></demo-top>
+
+                <demo-search></demo-search>
+            </div>
+        </div>
 
 
-    <script type="module" src="components/qui-alert.js"></script>
-    <script type="module" src="components/demo-component.js"></script>
-    <script type="module" src="components/demo-drinks.js"></script>
-    <script type="module" src="components/demo-orders.js"></script>
-    <script type="module" src="components/demo-title.js"></script>
-    <script type="module" src="components/demo-top.js"></script>
-    <script type="module" src="components/demo-search.js"></script>
-
-
-    <style>
-        :root {
-            --main-bg-color: #F8F8F8;
-            --main-highlight-text-color: #35180A;
-        }
-        body {
-            margin: 0;
-            width: 100%;
-            height: 100vh;
-            font-family: 'Red Hat Text', sans-serif;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            color: var(--lumo-body-text-color);
-            background: var(--main-bg-color);
-        }
-
-        /*Contains the menu and pages*/
-        .middle {
-            margin-left: auto;
-            margin-right: auto;
-            width: 1298px;
-            padding: 10px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            flex: 1;
-        }
-
-        #page {
-            overflow-y: auto;
-            overflow-x: hidden;
-            flex: 1;
-            padding-bottom: 10px;
-        }
-    </style>
-</head>
-
-<body>
-
-<demo-title></demo-title>
-
-<div class="middle">
-    <div id="page">
-        <demo-drinks></demo-drinks>
-
-        <demo-orders></demo-orders>
-
-        <demo-top></demo-top>
-
-        <demo-search></demo-search>
-    </div>
-</div>
-
-
-</body>
+    </body>
 
 </html>
