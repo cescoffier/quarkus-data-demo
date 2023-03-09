@@ -15,12 +15,12 @@ import './qui-alert.js';
 export class DemoOrders extends LitElement {
     static styles = css`
       .grid {
-        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         padding: 10px;
-        background: #EFE3CF81;
-        border-radius: 5px;
       }
-
+    
       h2 {
         font-family: Pacifico, fantasy;
         text-align: left;
@@ -60,17 +60,18 @@ export class DemoOrders extends LitElement {
 
     _render() {
         if (this._orders) {
-            return html`
-                <div class="grid">
-                    <h2>Orders</h2>
-                    ${this._orders.map(order => this._renderOrder(order))}
+            return html`<div class="grid">
+                    <div>
+                        <h2>Orders</h2>
+                        ${this._orders.map(order => this._renderOrder(order))}
+                    </div>
                 </div>`;
         }
     }
 
     _renderOrder(order) {
         return html`
-            <p>Processed the order of  a <strong>${order.product}</strong> - Order id: ${order.id}, Order time: ${order.time}</p>
+            <p>${order.time.split('.')[0].replace('T', ' ')} - Order id: ${order.id} : Processed the order of a <strong>${order.product}</strong></p>
         `
     }
 

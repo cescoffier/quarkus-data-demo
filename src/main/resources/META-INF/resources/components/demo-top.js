@@ -11,20 +11,26 @@ import '@vaadin/grid';
 import '@vaadin/grid/vaadin-grid-sort-column.js';
 import './demo-drink.js';
 import './qui-alert.js';
+import './echarts/echarts-pie.js';
 
 export class DemoTop extends LitElement {
     static styles = css`
       .grid {
-        margin-top: 10px;
         padding: 10px;
-        background: #EFE3CF81;
-        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
       h2 {
         font-family: Pacifico, fantasy;
         text-align: left;
         color: var(--main-highlight-text-color);
+      }
+    
+      echarts-pie {
+        width: 400px;
+        height: 400px;
       }
     `;
 
@@ -63,20 +69,28 @@ export class DemoTop extends LitElement {
     }
 
     render() {
+        super.render();
         console.log("top is", this._top);
-        return html`
-            <div class="grid">
-                <h2>Top Products</h2>
-                ${this._top.map(product => this._renderProduct(product))}
-            </div>`;
+        const titles = [];
+        const values = [];
+        for (var i = 0; i < this._top.length; i++) {
+            let t = this._top[i];
+            titles.push(t.value);
+            values.push(t.score);
+        }
+        if(this._top.length>0){
+            return html`
+                <div class="grid">
+                    <div>
+                        <h2>Top Products</h2>
+                        <echarts-pie name = "Top Products"
+                            sectionTitles="${titles.toString()}" 
+                            sectionValues="${values.toString()}">
+                        </echarts-pie>
+                    </div>
+                </div>`;
+        }
     }
-
-    _renderProduct(product) {
-        return html`
-            <p>${product.value} (${product.score})</p>
-        `
-    }
-
 
 }
 

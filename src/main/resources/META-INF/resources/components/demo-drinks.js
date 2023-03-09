@@ -19,7 +19,7 @@ export class DemoDrinks extends LitElement {
         flex-wrap: wrap;
         gap: 20px;
         padding: 10px;
-        background: #EFE3CF81;
+        justify-content: center;
         border-radius: 5px;
       }
 
