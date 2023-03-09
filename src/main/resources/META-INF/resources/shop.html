@@ -54,6 +54,13 @@
                 width: 100%;
                 padding-bottom: 10px;
             }
+            
+            .secondary {
+                display: flex;
+                gap: 20px;
+                justify-content: space-around;
+            }
+            
         </style>
     </head>
 
@@ -65,10 +72,11 @@
             <div id="page">
                 <demo-drinks></demo-drinks>
 
-                <demo-orders></demo-orders>
-
-                <demo-top></demo-top>
-
+                <div class="secondary">
+                    <demo-orders></demo-orders>
+                    <demo-top></demo-top>
+                </div>
+                
                 <demo-search></demo-search>
             </div>
         </div>
