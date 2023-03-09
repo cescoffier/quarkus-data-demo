@@ -54,7 +54,7 @@ class EchartsAbstractCanvas extends LitElement {
     }
 
     updated(){
-        super.firstUpdated();
+        super.updated();
         let canvasContainer = this.shadowRoot.querySelector('.canvasContainer');
         this._chart = echarts.init(canvasContainer);
         var option = this.getOption();
