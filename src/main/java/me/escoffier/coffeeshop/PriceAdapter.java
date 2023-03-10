@@ -1,37 +1,93 @@
 package me.escoffier.coffeeshop;
 
 import io.quarkus.redis.datasource.RedisDataSource;
+import io.quarkus.redis.datasource.hash.HashCommands;
+import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Multi;
-import io.smallrye.reactive.messaging.kafka.Record;
+import io.smallrye.mutiny.tuples.Tuple2;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 import me.escoffier.coffeeshop.model.Drink;
 import me.escoffier.coffeeshop.model.Order;
-import me.escoffier.coffeeshop.model.ProductPrice;
+import me.escoffier.coffeeshop.model.UpdatePriceCommand;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
 
 import java.time.Duration;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import static io.smallrye.mutiny.tuples.Tuple2.of;
+import static java.time.Duration.*;
+import static java.util.Collections.*;
 
 @ApplicationScoped
 public class PriceAdapter {
 
+    private final HashCommands<String, String, Double> hash;
+    private final Map<String, Double> basePrices = new ConcurrentHashMap<>();
+
+    PriceAdapter(RedisDataSource ds) {
+        hash = ds.hash(Double.class);
+        for (String key : ds.key().keys("drink-*")) {
+            Drink drink = ds.json().jsonGetObject(key).mapTo(Drink.class);
+            basePrices.put(drink.name, drink.price);
+        }
+    }
+
     @Incoming("order-tracking")
-    @Outgoing("price-update")
-    public Multi<ProductPrice> updatePrice(Multi<Order> orders) {
+    @Outgoing("grouped-orders-by-time-window")
+    public Multi<Tuple2<String, List<Order>>> groupOrdersPerProduct(Multi<Order> orders) {
         return orders
-                .group().by(order -> order.product)
-                .onItem().transformToMultiAndMerge(ordersByProduct -> ordersByProduct
-                        .group().intoLists().every(Duration.ofSeconds(10))
-                        .onItem().transformToMultiAndMerge(ordersByProductInTimeWindow -> {
-                            if (ordersByProductInTimeWindow.size() > 3) {
-                                ProductPrice pp = new ProductPrice();
-                                pp.product = ordersByProductInTimeWindow.get(0).product;
-                                pp.price = ordersByProductInTimeWindow.get(0).price + 0.5;
-                                return Multi.createFrom().item(pp);
-                            } else {
-                                return Multi.createFrom().empty();
-                            }
-                        }));
+                .group().by(o -> o.product)
+                .flatMap(gm -> gm
+                        .group().intoLists().every(ofSeconds(5)).map(list -> of(gm.key(), list))
+                        .ifNoItem().after(ofSeconds(10))
+                            .recoverWithMulti(Multi.createFrom().item(of(gm.key(), emptyList())))
+                );
+    }
+
+    @Incoming("grouped-orders-by-time-window")
+    @Outgoing("price-update")
+    @Blocking
+    public UpdatePriceCommand updatePriceIfNeeded(Tuple2<String, List<Order>> lastOrderByProduct) {
+        String product = lastOrderByProduct.getItem1();
+        int numberOfOrderInTheTimeWindow = lastOrderByProduct.getItem2().size();
+
+        double basePrice = basePrices.get(product);
+        var currentPrice = getCurrentPrice(product);
+
+        if (numberOfOrderInTheTimeWindow > 3) {
+            // We increase the price by 0.5.
+            var command = new UpdatePriceCommand(product, currentPrice + 0.5);
+            setCurrentPrice(command.product, command.price);
+            return command;
+        } else {
+            // We decrease the price by 0.5, except if lower than the base price
+            var newPrice = currentPrice - 0.5;
+            if (newPrice >= basePrice) {
+                var command = new UpdatePriceCommand(product, newPrice);
+                setCurrentPrice(command.product, command.price);
+                return command;
+            } else {
+                // We keep the price unchanged
+                return null;
+            }
+        }
+    }
+
+    private double getCurrentPrice(String product) {
+        Double d = hash.hget("current-prices", product);
+        if (d == null) {
+            return basePrices.get(product);
+        } else {
+            return d;
+        }
+    }
+
+    private void setCurrentPrice(String product, double price) {
+        hash.hset("current-prices", product, price);
     }
 }
+
