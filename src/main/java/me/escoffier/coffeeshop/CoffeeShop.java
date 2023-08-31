@@ -44,6 +44,7 @@ public class CoffeeShop {
     }
 
     private void updateTop3Products(Order order) {
+        // top-products -> sorted set of product name (set of [product, score])
         redis.sortedSet(String.class).zincrby("top-products", 1, order.product);
     }
 
@@ -65,6 +66,7 @@ public class CoffeeShop {
     MutinyEmitter<Record<String, Order>> emitter;
 
     public void sendOrderToKafka(Order order) {
+        // send a record or product - order
         emitter.sendAndAwait(Record.of(order.product, order));
     }
 

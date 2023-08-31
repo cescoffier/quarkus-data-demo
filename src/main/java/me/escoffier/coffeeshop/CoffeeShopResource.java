@@ -1,5 +1,6 @@
 package me.escoffier.coffeeshop;
 
+import io.quarkus.logging.Log;
 import io.quarkus.panache.common.Sort;
 import io.quarkus.redis.datasource.sortedset.ScoredValue;
 import io.smallrye.mutiny.Multi;
@@ -15,6 +16,7 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +41,7 @@ public class CoffeeShopResource {
     @Transactional
     @Path("/orders")
     public void buy(Order order) {
+      // persist and call onOrder
         order.persist();
         coffeeShop.onOrder(order);
     }
@@ -46,7 +49,9 @@ public class CoffeeShopResource {
     @GET
     @Path("/orders")
     public List<Order> getAllOrders() {
-        return Order.<Order>streamAll(Sort.by("time", Sort.Direction.Descending)).limit(5).collect(Collectors.toList());
+        // stream by descending time and get the first 5
+        return Order.<Order>streamAll(Sort.by("time", Sort.Direction.Descending))
+                .limit(5).collect(Collectors.toList());
     }
 
     // -------- NoSQL ----
